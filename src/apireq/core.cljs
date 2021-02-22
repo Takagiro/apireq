@@ -11,10 +11,11 @@
 (defn update! [key data]
   (swap! state update-in [(keyword key)] assoc :data data))
 
+;; (GET url) >> #object[Object [object Object]]
+;; (js->clj data) >> #object[Object [object Object]]
 (defn fetch [module]
   (let [url (get-in @state [:users :url])
-        data (GET url);; {:users {:data #object[Object [object Object]], :url "https://jsonplaceholder.typicode.com/users"}}
-        ]
+        data (GET url)]
     (update! module (js->clj data))))
 
 (defn home-page []
